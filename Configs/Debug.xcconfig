@@ -1,0 +1,9 @@
+// Debug signing for the GlobeFlip app target.
+// Ad-hoc signing works out of the box. Every rebuild changes the code
+// signature, so macOS forgets the Input Monitoring grant each time.
+// To keep the grant across rebuilds, create Configs/Local.xcconfig (ignored)
+// and set CODE_SIGN_IDENTITY to a self-signed certificate. See CONTRIBUTING.md.
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = -
+
+#include? "Local.xcconfig"

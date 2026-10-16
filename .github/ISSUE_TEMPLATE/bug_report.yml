@@ -1,0 +1,59 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you do, what did you expect, what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "26.1 (25B123)"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: GlobeFlip version
+      placeholder: "1.0 (Finder > GlobeFlip.app > Get Info)"
+    validations:
+      required: true
+  - type: input
+    id: keyboard
+    attributes:
+      label: Keyboard
+      placeholder: "Built-in MacBook Pro keyboard, Magic Keyboard, third party model"
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Enabled input sources
+      placeholder: "ABC, Russian, Japanese Romaji"
+  - type: dropdown
+    id: fnsetting
+    attributes:
+      label: System Settings > Keyboard > Press Fn/Globe key to
+      options:
+        - Do Nothing
+        - Change Input Source
+        - Show Emoji & Symbols
+        - Start Dictation
+        - Not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: permission
+    attributes:
+      label: Input Monitoring granted to GlobeFlip
+      options:
+        - "Yes"
+        - "No"
+        - Not sure
+    validations:
+      required: true

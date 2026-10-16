@@ -1,0 +1,13 @@
+.build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.handoff/
+.DS_Store
+
+GlobeFlip.xcodeproj/
+.release/
+dist/
+.scratch/
+Configs/Local.xcconfig
+.claude/

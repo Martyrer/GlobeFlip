@@ -1,0 +1,77 @@
+name: GlobeFlip
+
+options:
+  xcodeVersion: "27.0"
+  createIntermediateGroups: true
+  deploymentTarget:
+    macOS: "26.0"
+
+settings:
+  base:
+    ARCHS: arm64
+    DEAD_CODE_STRIPPING: true
+    ENABLE_HARDENED_RUNTIME: true
+    ENABLE_USER_SCRIPT_SANDBOXING: true
+    GENERATE_INFOPLIST_FILE: false
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY: true
+    SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY: true
+    SWIFT_VERSION: "6.0"
+
+targets:
+  GlobeFlipCore:
+    type: framework.static
+    platform: macOS
+    sources:
+      - Sources/GlobeFlipCore
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: com.martyrer.GlobeFlip.Core
+
+  GlobeFlip:
+    type: application
+    platform: macOS
+    sources:
+      - GlobeFlip
+    dependencies:
+      - target: GlobeFlipCore
+        embed: false
+    settings:
+      base:
+        INFOPLIST_FILE: GlobeFlip/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.martyrer.GlobeFlip
+        PRODUCT_NAME: GlobeFlip
+      configs:
+        Debug:
+          ENABLE_HARDENED_RUNTIME: false
+        Release:
+          CODE_SIGN_IDENTITY: "-"
+          CODE_SIGN_INJECT_BASE_ENTITLEMENTS: false
+          CODE_SIGN_STYLE: Manual
+    configFiles:
+      Debug: Configs/Debug.xcconfig
+
+  GlobeFlipTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - Tests/GlobeFlipCoreTests
+      - Tests/GlobeFlipAppTests
+    dependencies:
+      - target: GlobeFlip
+      - target: GlobeFlipCore
+        embed: false
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: com.martyrer.GlobeFlipTests
+
+schemes:
+  GlobeFlip:
+    build:
+      targets:
+        GlobeFlip: all
+    test:
+      targets:
+        - GlobeFlipTests
